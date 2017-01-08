@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.IntConsumer;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -59,6 +59,11 @@ public class StreamExample1 {
 		Stream<String> nameStream = studentList.stream().map(Student::getName);
 		Optional<String> reducedNames = nameStream.reduce((x,y) -> x + ", " + y);
 		reducedNames.ifPresent(System.out::println);
+		
+		List<String> studentsInUppercase = studentList.stream().map(Student::getName).sorted()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+		System.out.println(studentsInUppercase);
 		
 		List<String> memberNames = new ArrayList<>();
 		memberNames.add("Amitabh");
